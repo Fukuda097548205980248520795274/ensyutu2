@@ -50,6 +50,9 @@
     <ClCompile Include="Class\Object\Particle\Particle.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Object\Particle\Rain\Rain.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -129,5 +132,6 @@
     <ClInclude Include="Class\Object\Object.h" />
     <ClInclude Include="Class\Object\Player\Player.h" />
     <ClInclude Include="Class\Object\Particle\Particle.h" />
+    <ClInclude Include="Class\Object\Particle\Rain\Rain.h" />
   </ItemGroup>
 </Project>

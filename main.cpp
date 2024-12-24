@@ -1,8 +1,11 @@
 #include <Novice.h>
 #include "Constant.h"
 #include "./Class/Object/Player/Player.h"
+#include "./Class/Object/Particle/Rain/Rain.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
+
+int Rain::countId;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
