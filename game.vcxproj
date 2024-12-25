@@ -119,6 +119,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Class\Object\Particle\Particle.cpp" />
     <ClCompile Include="Class\Object\Particle\Raindrops\Raindrops.cpp" />
     <ClCompile Include="Class\Object\Particle\Rain\Rain.cpp" />
+    <ClCompile Include="Class\Object\Particle\Thunder\Thunder.cpp" />
     <ClCompile Include="Class\Object\Player\Player.cpp" />
     <ClCompile Include="Function\Matrix\Matrix.cpp" />
     <ClCompile Include="main.cpp" />
@@ -155,6 +156,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Class\Object\Particle\Particle.h" />
     <ClInclude Include="Class\Object\Particle\Raindrops\Raindrops.h" />
     <ClInclude Include="Class\Object\Particle\Rain\Rain.h" />
+    <ClInclude Include="Class\Object\Particle\Thunder\Thunder.h" />
     <ClInclude Include="Class\Object\Player\Player.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Function\Matrix\Matrix.h" />

@@ -5,11 +5,14 @@
 #include "./Class/Object/Player/Player.h"
 #include "./Class/Object/Particle/Rain/Rain.h"
 #include "./Class/Object/Particle/Raindrops/Raindrops.h"
+#include "./Class/Object/Particle/Thunder/Thunder.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
 
 int Rain::countId;
 int Raindrops::countId;
+int Thunder::countId;
+int Thunder::coolTime;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -40,6 +43,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		rain[i] = new Rain();
 	}
 
+	// 雷
+	Thunder* thunder[kThunderNum];
+	for (int i = 0; i < kThunderNum; i++)
+	{
+		thunder[i] = new Thunder();
+	}
+
 	// 白い図形
 	int ghWhite = Novice::LoadTexture("./NoviceResources/white1x1.png");
 
@@ -61,6 +71,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		player->Move(keys, preKeys);
 		player->Jump(keys, preKeys);
 
+
+		/*   放出する   */
+
 		// 雨
 		for (int i = 0; i < 3; i++)
 		{
@@ -76,9 +89,44 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 
+		// 雷
+
+		// クールタイムを進める
+		if (Thunder::coolTime > 0)
+		{
+			Thunder::coolTime--;
+		}
+
+		// クールタイムが完了したら、放出する
+		if (Thunder::coolTime <= 0)
+		{
+			for (int i = 0; i < kThunderNum; i++)
+			{
+				if (thunder[i]->id_ == 0)
+				{
+					// クールタイムを入れる
+					Thunder::coolTime = 30 + rand() % 600;
+
+					thunder[i]->Emission();
+
+					break;
+				}
+			}
+		}
+
+
+		/*   動かす   */
+
+		// 雨
 		for (int i = 0; i < kRainNum; i++)
 		{
 			rain[i]->Move();
+		}
+
+		// 雷
+		for (int i = 0; i < kThunderNum; i++)
+		{
+			thunder[i]->Move();
 		}
 
 		///
@@ -100,6 +148,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		for (int i = 0; i < kRainNum; i++)
 		{
 			rain[i]->Draw(ghWhite);
+		}
+
+		// 雷
+		for (int i = 0; i < kThunderNum; i++)
+		{
+			thunder[i]->Draw(ghWhite);
 		}
 
 		///
@@ -128,6 +182,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	{
 		delete rain[i];
 	}
+
+	// 雷
+	for (int i = 0; i < kThunderNum; i++)
+	{
+		delete thunder[i];
+	}
+
 
 	// ライブラリの終了
 	Novice::Finalize();
