@@ -77,9 +77,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///
 
+		/*   プレイヤー   */
+
 		// 操作する
 		player->Move(keys, preKeys);
 		player->Jump(keys, preKeys);
+
+
+		/*   ボス   */
+
+
 
 
 		/*   放出する   */
