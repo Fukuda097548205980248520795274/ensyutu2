@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Constant.h"
+#include "Enumeration.h"
 #include "./Class/Object/Player/Player.h"
 #include "./Class/Object/Particle/Rain/Rain.h"
 #include "./Class/Object/Particle/Raindrops/Raindrops.h"
 #include "./Class/Object/Particle/Thunder/Thunder.h"
 #include "./Class/Object/Particle/Hinoko/Hinoko.h"
+#include "./Class/Object/Boss/HellBoss/HellBoss.h"
+#include "./Class/Object/Boss/IceBoss/IceBoss.h"
+#include "./Class/Object/Boss/MagicBoss/MagicBoss.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
 
@@ -36,8 +40,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	    変数を作る
 	---------------*/
 
+	/*   切り替え   */
+
+	// ステージの種類
+	STAGE stageNo = STAGE_1;
+
+
+	/*   キャラクター   */
+
 	// プレイヤー
 	Player* player = new Player();
+
+	// ボス
+	HellBoss* hellBoss = new HellBoss();
+	IceBoss* iceBoss = new IceBoss();
+	MagicBoss* magicBoss = new MagicBoss();
+
+
+	/*   パーティクル   */
 
 	// 雨
 	Rain* rain[kRainNum];
@@ -59,6 +79,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	{
 		hinoko[i] = new Hinoko();
 	}
+
+
+	/*   画像   */
 
 	// 白い図形
 	int ghWhite = Novice::LoadTexture("./NoviceResources/white1x1.png");
@@ -83,108 +106,125 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		player->Move(keys, preKeys);
 		player->Jump(keys, preKeys);
 
-
-		/*   ボス   */
-
-
-
-
-		/*   放出する   */
-
-		// 雨
-		for (int i = 0; i < 3; i++)
+		// ステージ切り替え
+		switch (stageNo)
 		{
-			for (int j = 0; j < kRainNum; j++)
+		case STAGE_1:
+			// ステージ1
+
+			/*   ボス   */
+
+
+
+
+			/*   放出する   */
+
+			/// 雨
+			for (int i = 0; i < 3; i++)
 			{
-				if (rain[j]->id_ == 0)
+				for (int j = 0; j < kRainNum; j++)
 				{
-					rain[j]->Emission(static_cast<float>(rand() % (kScreenWidth + 400)), 700.0f, 250.0f);
-
-					break;
-				}
-			}
-		}
-
-
-		// 雷
-
-		// クールタイムを進める
-		if (Thunder::coolTime > 0)
-		{
-			Thunder::coolTime--;
-		}
-
-		// クールタイムが完了したら、放出する
-		if (Thunder::coolTime <= 0)
-		{
-			for (int i = 0; i < kThunderNum; i++)
-			{
-				if (thunder[i]->id_ == 0)
-				{
-					// クールタイムを入れる
-					Thunder::coolTime = 30 + rand() % 600;
-
-					thunder[i]->Emission();
-
-					break;
-				}
-			}
-		}
-
-
-		// 火の粉
-		
-		// クールタイムを進める
-		if (Hinoko::coolTime > 0)
-		{
-			Hinoko::coolTime--;
-		}
-
-		// クールタイムが完了したら放出する
-		if (Hinoko::coolTime <= 0)
-		{
-			for (int j = 0; j < 5; j++)
-			{
-				for (int i = 0; i < kHinokoNum; i++)
-				{
-					if (hinoko[i]->id_ == 0)
+					if (rain[j]->id_ == 0)
 					{
-						Hinoko::coolTime = 5;
-
-						if (j > 2)
-						{
-							hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -30.0f, 140.0f, rand() % 90);
-						} 
-						else
-						{
-							hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -10.0f, 140.0f, 0);
-						}
+						rain[j]->Emission(static_cast<float>(rand() % (kScreenWidth + 400)), 700.0f, 250.0f);
 
 						break;
 					}
 				}
 			}
-		}
 
 
-		/*   動かす   */
+			/// 雷
 
-		// 雨
-		for (int i = 0; i < kRainNum; i++)
-		{
-			rain[i]->Move();
-		}
+			// クールタイムを進める
+			if (Thunder::coolTime > 0)
+			{
+				Thunder::coolTime--;
+			}
 
-		// 雷
-		for (int i = 0; i < kThunderNum; i++)
-		{
-			thunder[i]->Move();
-		}
+			// クールタイムが完了したら、放出する
+			if (Thunder::coolTime <= 0)
+			{
+				for (int i = 0; i < kThunderNum; i++)
+				{
+					if (thunder[i]->id_ == 0)
+					{
+						// クールタイムを入れる
+						Thunder::coolTime = 30 + rand() % 600;
 
-		// 火の粉
-		for (int i = 0; i < kHinokoNum; i++)
-		{
-			hinoko[i]->Move();
+						thunder[i]->Emission();
+
+						break;
+					}
+				}
+			}
+
+
+			/// 火の粉
+
+			// クールタイムを進める
+			if (Hinoko::coolTime > 0)
+			{
+				Hinoko::coolTime--;
+			}
+
+			// クールタイムが完了したら放出する
+			if (Hinoko::coolTime <= 0)
+			{
+				for (int j = 0; j < 5; j++)
+				{
+					for (int i = 0; i < kHinokoNum; i++)
+					{
+						if (hinoko[i]->id_ == 0)
+						{
+							Hinoko::coolTime = 5;
+
+							if (j > 2)
+							{
+								hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -30.0f, 140.0f, rand() % 90);
+							} else
+							{
+								hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -10.0f, 140.0f, 0);
+							}
+
+							break;
+						}
+					}
+				}
+			}
+
+
+			/*   動かす   */
+
+			/// 雨
+			for (int i = 0; i < kRainNum; i++)
+			{
+				rain[i]->Move();
+			}
+
+			/// 雷
+			for (int i = 0; i < kThunderNum; i++)
+			{
+				thunder[i]->Move();
+			}
+
+			/// 火の粉
+			for (int i = 0; i < kHinokoNum; i++)
+			{
+				hinoko[i]->Move();
+			}
+
+			break;
+
+		case STAGE_2:
+			// ステージ2
+
+			break;
+
+		case STAGE_3:
+			// ステージ3
+
+			break;
 		}
 
 		///
@@ -195,35 +235,54 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
-		/*-------------------
-		    画像を描画する
-		-------------------*/
-
-		// 背景
-		Novice::DrawBox
-		(0 , 0 , kScreenWidth , kScreenHeight , 0.0f , 0x333333FF , kFillModeSolid);
-
-		// 火の粉
-		for (int i = 0; i < kHinokoNum; i++)
+		// ステージ切り替え
+		switch (stageNo)
 		{
-			hinoko[i]->Draw(ghWhite);
-		}
+		case STAGE_1:
+			// ステージ1
 
-		// 雨
-		for (int i = 0; i < kRainNum; i++)
-		{
-			rain[i]->Draw(ghWhite);
-		}
+			/*-------------------
+				画像を描画する
+			-------------------*/
 
-		// 雷
-		for (int i = 0; i < kThunderNum; i++)
-		{
-			thunder[i]->Draw(ghWhite);
-		}
+			// 背景
+			Novice::DrawBox
+			(0, 0, kScreenWidth, kScreenHeight, 0.0f, 0x333333FF, kFillModeSolid);
 
-		// 地面
-		Novice::DrawBox
-		(0,670,kScreenWidth , 50 , 0.0f , 0x000000FF , kFillModeSolid);
+			// 火の粉
+			for (int i = 0; i < kHinokoNum; i++)
+			{
+				hinoko[i]->Draw(ghWhite);
+			}
+
+			// 雨
+			for (int i = 0; i < kRainNum; i++)
+			{
+				rain[i]->Draw(ghWhite);
+			}
+
+			// 雷
+			for (int i = 0; i < kThunderNum; i++)
+			{
+				thunder[i]->Draw(ghWhite);
+			}
+
+			// 地面
+			Novice::DrawBox
+			(0, 670, kScreenWidth, 50, 0.0f, 0x000000FF, kFillModeSolid);
+
+			break;
+
+		case STAGE_2:
+			// ステージ2
+
+			break;
+
+		case STAGE_3:
+			// ステージ3
+
+			break;
+		}
 
 		// プレイヤー
 		player->Draw(ghWhite);
@@ -248,6 +307,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// プレイヤー
 	delete player;
+
+	// ボス
+	delete hellBoss;
+	delete iceBoss;
+	delete magicBoss;
 
 	// 雨
 	for (int i = 0; i < kRainNum; i++)

@@ -161,5 +161,6 @@
     <ClInclude Include="Class\Object\Boss\HellBoss\HellBoss.h" />
     <ClInclude Include="Class\Object\Boss\IceBoss\IceBoss.h" />
     <ClInclude Include="Class\Object\Boss\MagicBoss\MagicBoss.h" />
+    <ClInclude Include="Enumeration.h" />
   </ItemGroup>
 </Project>
