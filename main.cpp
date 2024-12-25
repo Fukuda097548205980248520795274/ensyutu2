@@ -248,7 +248,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			for (int i = 0; i < kSnowNum; i++)
 			{
-				snow[i]->Move();
+				snow[i]->Move(&player->shape_);
 			}
 
 			break;
