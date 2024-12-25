@@ -124,6 +124,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Class\Object\Particle\Particle.cpp" />
     <ClCompile Include="Class\Object\Particle\Raindrops\Raindrops.cpp" />
     <ClCompile Include="Class\Object\Particle\Rain\Rain.cpp" />
+    <ClCompile Include="Class\Object\Particle\Snowfall\Snowfall.cpp" />
     <ClCompile Include="Class\Object\Particle\Snow\Snow.cpp" />
     <ClCompile Include="Class\Object\Particle\Thunder\Thunder.cpp" />
     <ClCompile Include="Class\Object\Player\Player.cpp" />
@@ -167,6 +168,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Class\Object\Particle\Particle.h" />
     <ClInclude Include="Class\Object\Particle\Raindrops\Raindrops.h" />
     <ClInclude Include="Class\Object\Particle\Rain\Rain.h" />
+    <ClInclude Include="Class\Object\Particle\Snowfall\Snowfall.h" />
     <ClInclude Include="Class\Object\Particle\Snow\Snow.h" />
     <ClInclude Include="Class\Object\Particle\Thunder\Thunder.h" />
     <ClInclude Include="Class\Object\Player\Player.h" />

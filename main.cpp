@@ -12,6 +12,7 @@
 #include "./Class/Object/Boss/IceBoss/IceBoss.h"
 #include "./Class/Object/Boss/MagicBoss/MagicBoss.h"
 #include "./Class/Object/Particle/Snow/Snow.h"
+#include "./Class/Object/Particle/Snowfall/Snowfall.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
 
@@ -22,6 +23,7 @@ int Thunder::coolTime;
 int Hinoko::countId;
 int Hinoko::coolTime;
 int Snow::countId;
+int Snowfall::countId;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -306,11 +308,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case STAGE_2:
 			// ステージ2
 
+			// 背景
+			Novice::DrawBox
+			(0, 0, kScreenWidth, kScreenHeight, 0.0f, 0x000033FF, kFillModeSolid);
+
 			// 雪
 			for (int i = 0; i < kSnowNum; i++)
 			{
 				snow[i]->Draw(ghWhite);
 			}
+
+			// 地面
+			Novice::DrawBox
+			(0, 670, kScreenWidth, 50, 0.0f, 0x660000FF, kFillModeSolid);
 
 			break;
 
