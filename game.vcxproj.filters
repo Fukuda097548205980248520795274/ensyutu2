@@ -74,6 +74,9 @@
     <ClCompile Include="Class\Object\Boss\MagicBoss\MagicBoss.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Object\Particle\Snow\Snow.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -162,5 +165,6 @@
     <ClInclude Include="Class\Object\Boss\IceBoss\IceBoss.h" />
     <ClInclude Include="Class\Object\Boss\MagicBoss\MagicBoss.h" />
     <ClInclude Include="Enumeration.h" />
+    <ClInclude Include="Class\Object\Particle\Snow\Snow.h" />
   </ItemGroup>
 </Project>

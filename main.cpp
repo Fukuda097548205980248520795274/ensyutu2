@@ -11,6 +11,7 @@
 #include "./Class/Object/Boss/HellBoss/HellBoss.h"
 #include "./Class/Object/Boss/IceBoss/IceBoss.h"
 #include "./Class/Object/Boss/MagicBoss/MagicBoss.h"
+#include "./Class/Object/Particle/Snow/Snow.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
 
@@ -20,6 +21,7 @@ int Thunder::countId;
 int Thunder::coolTime;
 int Hinoko::countId;
 int Hinoko::coolTime;
+int Snow::countId;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -43,7 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	/*   切り替え   */
 
 	// ステージの種類
-	STAGE stageNo = STAGE_1;
+	STAGE stageNo = STAGE_2;
 
 
 	/*   キャラクター   */
@@ -78,6 +80,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (int i = 0; i < kHinokoNum; i++)
 	{
 		hinoko[i] = new Hinoko();
+	}
+
+	// 雪
+	Snow* snow[kSnowNum];
+	for (int i = 0; i < kSnowNum; i++)
+	{
+		snow[i] = new Snow();
 	}
 
 
@@ -219,6 +228,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case STAGE_2:
 			// ステージ2
 
+			/*   放出する   */
+
+			// 雪
+			for (int i = 0; i < kSnowNum; i++)
+			{
+				if (snow[i]->id_ == 0)
+				{
+					snow[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 400)), 700.0f, static_cast<float>(rand() % 360), 260.0f);
+
+					break;
+				}
+			}
+
+
+			/*   動かす   */
+
+			for (int i = 0; i < kSnowNum; i++)
+			{
+				snow[i]->Move();
+			}
+
 			break;
 
 		case STAGE_3:
@@ -276,6 +306,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case STAGE_2:
 			// ステージ2
 
+			// 雪
+			for (int i = 0; i < kSnowNum; i++)
+			{
+				snow[i]->Draw(ghWhite);
+			}
+
 			break;
 
 		case STAGE_3:
@@ -329,6 +365,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (int i = 0; i < kHinokoNum; i++)
 	{
 		delete hinoko[i];
+	}
+
+	// 雪
+	for (int i = 0; i < kSnowNum; i++)
+	{
+		delete snow[i];
 	}
 
 
