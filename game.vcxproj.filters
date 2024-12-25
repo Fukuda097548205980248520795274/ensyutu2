@@ -65,6 +65,15 @@
     <ClCompile Include="Class\Object\Boss\Boss.cpp">
       <Filter>KamataEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Class\Object\Boss\HellBoss\HellBoss.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Object\Boss\IceBoss\IceBoss.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Class\Object\Boss\MagicBoss\MagicBoss.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -149,5 +158,8 @@
     <ClInclude Include="Class\Object\Particle\Thunder\Thunder.h" />
     <ClInclude Include="Class\Object\Particle\Hinoko\Hinoko.h" />
     <ClInclude Include="Class\Object\Boss\Boss.h" />
+    <ClInclude Include="Class\Object\Boss\HellBoss\HellBoss.h" />
+    <ClInclude Include="Class\Object\Boss\IceBoss\IceBoss.h" />
+    <ClInclude Include="Class\Object\Boss\MagicBoss\MagicBoss.h" />
   </ItemGroup>
 </Project>

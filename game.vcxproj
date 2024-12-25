@@ -116,6 +116,9 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.cpp" />
     <ClCompile Include="C:\KamataEngine\Adapter\Novice.cpp" />
     <ClCompile Include="Class\Object\Boss\Boss.cpp" />
+    <ClCompile Include="Class\Object\Boss\HellBoss\HellBoss.cpp" />
+    <ClCompile Include="Class\Object\Boss\IceBoss\IceBoss.cpp" />
+    <ClCompile Include="Class\Object\Boss\MagicBoss\MagicBoss.cpp" />
     <ClCompile Include="Class\Object\Object.cpp" />
     <ClCompile Include="Class\Object\Particle\Hinoko\Hinoko.cpp" />
     <ClCompile Include="Class\Object\Particle\Particle.cpp" />
@@ -155,6 +158,9 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="C:\KamataEngine\DirectXGame\scene\GameScene.h" />
     <ClInclude Include="C:\KamataEngine\Adapter\Novice.h" />
     <ClInclude Include="Class\Object\Boss\Boss.h" />
+    <ClInclude Include="Class\Object\Boss\HellBoss\HellBoss.h" />
+    <ClInclude Include="Class\Object\Boss\IceBoss\IceBoss.h" />
+    <ClInclude Include="Class\Object\Boss\MagicBoss\MagicBoss.h" />
     <ClInclude Include="Class\Object\Object.h" />
     <ClInclude Include="Class\Object\Particle\Hinoko\Hinoko.h" />
     <ClInclude Include="Class\Object\Particle\Particle.h" />
