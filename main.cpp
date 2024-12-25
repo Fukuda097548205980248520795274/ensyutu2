@@ -6,6 +6,7 @@
 #include "./Class/Object/Particle/Rain/Rain.h"
 #include "./Class/Object/Particle/Raindrops/Raindrops.h"
 #include "./Class/Object/Particle/Thunder/Thunder.h"
+#include "./Class/Object/Particle/Hinoko/Hinoko.h"
 
 const char kWindowTitle[] = "LC1B_20_フクダソウワ";
 
@@ -13,6 +14,8 @@ int Rain::countId;
 int Raindrops::countId;
 int Thunder::countId;
 int Thunder::coolTime;
+int Hinoko::countId;
+int Hinoko::coolTime;
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -48,6 +51,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (int i = 0; i < kThunderNum; i++)
 	{
 		thunder[i] = new Thunder();
+	}
+
+	// 火の粉
+	Hinoko* hinoko[kHinokoNum];
+	for (int i = 0; i < kHinokoNum; i++)
+	{
+		hinoko[i] = new Hinoko();
 	}
 
 	// 白い図形
@@ -115,6 +125,41 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 
+		// 火の粉
+		
+		// クールタイムを進める
+		if (Hinoko::coolTime > 0)
+		{
+			Hinoko::coolTime--;
+		}
+
+		// クールタイムが完了したら放出する
+		if (Hinoko::coolTime <= 0)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				for (int i = 0; i < kHinokoNum; i++)
+				{
+					if (hinoko[i]->id_ == 0)
+					{
+						Hinoko::coolTime = 5;
+
+						if (j > 2)
+						{
+							hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -30.0f, 140.0f, rand() % 90);
+						} 
+						else
+						{
+							hinoko[i]->Emission(static_cast<float>(rand() % (kScreenWidth + 300)), -10.0f, 140.0f, 0);
+						}
+
+						break;
+					}
+				}
+			}
+		}
+
+
 		/*   動かす   */
 
 		// 雨
@@ -129,6 +174,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			thunder[i]->Move();
 		}
 
+		// 火の粉
+		for (int i = 0; i < kHinokoNum; i++)
+		{
+			hinoko[i]->Move();
+		}
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -141,8 +192,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		    画像を描画する
 		-------------------*/
 
-		// プレイヤー
-		player->Draw(ghWhite);
+		// 背景
+		Novice::DrawBox
+		(0 , 0 , kScreenWidth , kScreenHeight , 0.0f , 0x333333FF , kFillModeSolid);
+
+		// 火の粉
+		for (int i = 0; i < kHinokoNum; i++)
+		{
+			hinoko[i]->Draw(ghWhite);
+		}
 
 		// 雨
 		for (int i = 0; i < kRainNum; i++)
@@ -155,6 +213,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		{
 			thunder[i]->Draw(ghWhite);
 		}
+
+		// 地面
+		Novice::DrawBox
+		(0,670,kScreenWidth , 50 , 0.0f , 0x000000FF , kFillModeSolid);
+
+		// プレイヤー
+		player->Draw(ghWhite);
 
 		///
 		/// ↑描画処理ここまで
@@ -187,6 +252,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	for (int i = 0; i < kThunderNum; i++)
 	{
 		delete thunder[i];
+	}
+
+	// 火の粉
+	for (int i = 0; i < kHinokoNum; i++)
+	{
+		delete hinoko[i];
 	}
 
 
