@@ -211,6 +211,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			for (int i = 0; i < kRainNum; i++)
 			{
 				rain[i]->Move();
+				rain[i]->Hit(&player->shape_);
 			}
 
 			/// 雷
@@ -223,6 +224,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			for (int i = 0; i < kHinokoNum; i++)
 			{
 				hinoko[i]->Move();
+			}
+
+
+			/*   切り替え   */
+
+			// Spaceキーで、ステージ2に切り替える
+			if (!preKeys[DIK_SPACE] && keys[DIK_SPACE])
+			{
+				stageNo = STAGE_2;
 			}
 
 			break;
@@ -248,13 +258,32 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			for (int i = 0; i < kSnowNum; i++)
 			{
-				snow[i]->Move(&player->shape_);
+				snow[i]->Move();
+				snow[i]->Hit(&player->shape_);
+			}
+
+
+			/*   切り替え   */
+
+			// Spaceキーで、ステージ3に切り替える
+			if (!preKeys[DIK_SPACE] && keys[DIK_SPACE])
+			{
+				stageNo = STAGE_3;
 			}
 
 			break;
 
 		case STAGE_3:
 			// ステージ3
+
+
+			/*   切り替え   */
+
+			// Spaceキーで、ステージ1に切り替える
+			if (!preKeys[DIK_SPACE] && keys[DIK_SPACE])
+			{
+				stageNo = STAGE_1;
+			}
 
 			break;
 		}
